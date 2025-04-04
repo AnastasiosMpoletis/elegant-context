@@ -67,6 +67,14 @@ function App() {
     });
   }
 
+  /**
+   * We can add either states or functions to the context value.
+   */
+  const ctxValue = {
+    items: shoppingCart.items, // link context with our state
+    addItemToCart: handleAddItemToCart,
+  }
+
   return (
     /**
      * Provider can be omitted from React 19 and above. Must be used for React 18 and below.
@@ -74,7 +82,7 @@ function App() {
      * !!!WE MUST SET A VALUE PROP!!!
      * The default value set when creating the context is only used if a component that was not wrapped by the Provider component tries to access the context value.
      */
-    <CartConext.Provider value={{ items: [] }}>
+    <CartConext.Provider value={ctxValue}>
       <Header
         cart={shoppingCart}
         onUpdateCartItemQuantity={handleUpdateCartItemQuantity}
