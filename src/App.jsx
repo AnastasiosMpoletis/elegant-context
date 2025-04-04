@@ -4,6 +4,7 @@ import Header from './components/Header.jsx';
 import Shop from './components/Shop.jsx';
 import Product from './components/Product.jsx';
 import { DUMMY_PRODUCTS } from './dummy-products.js';
+import { CartConext } from './store/shopping-cart-context.jsx';
 
 function App() {
   const [shoppingCart, setShoppingCart] = useState({
@@ -67,7 +68,13 @@ function App() {
   }
 
   return (
-    <>
+    /**
+     * Provider can be omitted from React 19 and above. Must be used for React 18 and below.
+     * 
+     * !!!WE MUST SET A VALUE PROP!!!
+     * The default value set when creating the context is only used if a component that was not wrapped by the Provider component tries to access the context value.
+     */
+    <CartConext.Provider value={{ items: [] }}>
       <Header
         cart={shoppingCart}
         onUpdateCartItemQuantity={handleUpdateCartItemQuantity}
@@ -79,7 +86,7 @@ function App() {
           </li>
         ))}
       </Shop>
-    </>
+    </CartConext.Provider>
   );
 }
 
